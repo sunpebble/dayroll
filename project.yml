@@ -28,6 +28,9 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen: {}
+        # Tape design is hardcoded light paper — lock light mode so the status
+        # bar stays dark-on-paper instead of white-on-paper in dark mode
+        UIUserInterfaceStyle: Light
         ITSAppUsesNonExemptEncryption: false
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
