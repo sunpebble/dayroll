@@ -162,18 +162,6 @@ struct RootView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(TapePressStyle())
-        .contextMenu {
-            Button {
-                composeTarget = ComposeTarget(day: entry.day)
-            } label: {
-                Label("Edit", systemImage: "pencil")
-            }
-            Button(role: .destructive) {
-                DataStore.delete(day: entry.day)
-            } label: {
-                Label("Delete", systemImage: "trash")
-            }
-        }
     }
 
     @ViewBuilder
