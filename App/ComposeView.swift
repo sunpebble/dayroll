@@ -32,7 +32,7 @@ struct ComposeView: View {
                                 .opacity(mood == candidate ? 1 : 0.3)
                                 .scaleEffect(mood == candidate ? 1.2 : 1)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(TapePressStyle())
                     }
                 }
                 .animation(.snappy, value: mood)
