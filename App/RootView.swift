@@ -161,7 +161,7 @@ struct RootView: View {
             .padding(.vertical, 2)
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(TapePressStyle())
         .contextMenu {
             Button {
                 composeTarget = ComposeTarget(day: entry.day)
@@ -208,6 +208,7 @@ struct RootView: View {
                 .frame(width: 52, height: 52)
                 .background(Circle().fill(Tape.ink))
         }
+        .buttonStyle(TapePressStyle())
     }
 }
 

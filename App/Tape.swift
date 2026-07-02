@@ -11,6 +11,14 @@ enum Tape {
     }
 }
 
+/// Soft press feedback: the system press highlight glares against receipt paper.
+struct TapePressStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 0.6 : 1)
+    }
+}
+
 struct Perforation: View {
     var body: some View {
         Line()
