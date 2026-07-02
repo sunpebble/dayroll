@@ -16,7 +16,7 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - id: release
-        uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4
+        uses: googleapis/release-please-action@v5
 
   # Runs only when a release PR is merged (release created).
   # Chained here because releases created with GITHUB_TOKEN don't trigger `on: release` workflows.
@@ -29,7 +29,7 @@ jobs:
       ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@v7
 
       # ASC requires builds with the iOS 26 SDK; the runner's default Xcode is older
       - name: Select Xcode 26
@@ -41,21 +41,14 @@ jobs:
       - name: Install xcodegen
         run: brew install xcodegen
 
+      # Imports into a temporary keychain and deletes it in a post-run step
       - name: Import distribution certificate
-        env:
-          DIST_CERT_P12: ${{ secrets.DIST_CERT_P12 }}
-          DIST_CERT_PASSWORD: ${{ secrets.DIST_CERT_PASSWORD }}
-        run: |
-          KEYCHAIN_PASSWORD=$(uuidgen)
-          security create-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
-          security default-keychain -s build.keychain
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
-          security set-keychain-settings -lut 1800 build.keychain
-          echo "$DIST_CERT_P12" | base64 -d > cert.p12
-          security import cert.p12 -k build.keychain -P "$DIST_CERT_PASSWORD" -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" build.keychain
-          rm cert.p12
+        uses: apple-actions/import-codesign-certs@v7
+        with:
+          p12-file-base64: ${{ secrets.DIST_CERT_P12 }}
+          p12-password: ${{ secrets.DIST_CERT_PASSWORD }}
 
+      # xcodebuild needs the key on disk for -allowProvisioningUpdates
       - name: Write App Store Connect API key
         env:
           ASC_API_KEY_P8: ${{ secrets.ASC_API_KEY_P8 }}
@@ -82,7 +75,7 @@ jobs:
             -authenticationKeyID "$ASC_KEY_ID" \
             -authenticationKeyIssuerID "$ASC_ISSUER_ID"
 
-      - name: Upload to TestFlight
+      - name: Export IPA
         run: |
           cat > ExportOptions.plist <<EOF
           <?xml version="1.0" encoding="UTF-8"?>
@@ -90,7 +83,7 @@ jobs:
           <plist version="1.0">
           <dict>
             <key>method</key><string>app-store-connect</string>
-            <key>destination</key><string>upload</string>
+            <key>destination</key><string>export</string>
             <key>teamID</key><string>${APPLE_TEAM_ID}</string>
           </dict>
           </plist>
@@ -104,8 +97,14 @@ jobs:
             -authenticationKeyID "$ASC_KEY_ID" \
             -authenticationKeyIssuerID "$ASC_ISSUER_ID"
 
+      - name: Upload to TestFlight
+        uses: apple-actions/upload-testflight-build@v5
+        with:
+          app-path: build/Dayroll.ipa
+          issuer-id: ${{ secrets.ASC_ISSUER_ID }}
+          api-key-id: ${{ secrets.ASC_KEY_ID }}
+          api-private-key: ${{ secrets.ASC_API_KEY_P8 }}
+
       - name: Clean up credentials
         if: always()
-        run: |
-          rm -rf private_keys ExportOptions.plist
-          security delete-keychain build.keychain || true
+        run: rm -rf private_keys ExportOptions.plist
