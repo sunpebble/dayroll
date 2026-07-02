@@ -1,13 +1,13 @@
 name: Dayroll
 options:
-  bundleIdPrefix: com.kunish
+  bundleIdPrefix: com.sunpebble
   deploymentTarget:
     iOS: "17.0"
   createIntermediateGroups: true
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: 0.1.0
+    MARKETING_VERSION: 0.1.0 # x-release-please-version
     CURRENT_PROJECT_VERSION: 1
 targets:
   Dayroll:
@@ -18,12 +18,14 @@ targets:
       - Shared
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.kunish.dayroll
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunpebble.dayroll
         CODE_SIGN_ENTITLEMENTS: App/Dayroll.entitlements
     info:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Dayroll
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen: {}
         ITSAppUsesNonExemptEncryption: false
         UISupportedInterfaceOrientations:
@@ -46,12 +48,14 @@ targets:
       - Shared
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.kunish.dayroll.widget
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunpebble.dayroll.widget
         CODE_SIGN_ENTITLEMENTS: Widget/DayrollWidget.entitlements
     info:
       path: Widget/Info.plist
       properties:
         CFBundleDisplayName: Dayroll
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
   DayrollTests:

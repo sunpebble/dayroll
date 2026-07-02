@@ -15,7 +15,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.kunish.dayroll.lifetime",
+      "productID" : "com.sunpebble.dayroll.lifetime",
       "referenceName" : "Lifetime",
       "type" : "NonConsumable"
     }
