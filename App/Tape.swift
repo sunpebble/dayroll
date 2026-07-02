@@ -5,6 +5,7 @@ enum Tape {
     static let paper = Color(red: 0.98, green: 0.96, blue: 0.91)
     static let ink = Color(red: 0.15, green: 0.13, blue: 0.11)
     static let faded = ink.opacity(0.45)
+    static let alert = Color(red: 0.72, green: 0.13, blue: 0.09)
 
     static func font(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
         .system(size: size, weight: weight, design: .monospaced)
