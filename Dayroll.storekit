@@ -1,0 +1,33 @@
+{
+  "identifier" : "A1B2C3D4-0000-4000-8000-DAYROLL00001",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "6F000001",
+      "localizations" : [
+        {
+          "description" : "Export, stats and every future Pro feature. Forever.",
+          "displayName" : "Dayroll Pro — Lifetime",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.kunish.dayroll.lifetime",
+      "referenceName" : "Lifetime",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

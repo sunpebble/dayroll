@@ -1,0 +1,81 @@
+name: Dayroll
+options:
+  bundleIdPrefix: com.kunish
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: 0.1.0
+    CURRENT_PROJECT_VERSION: 1
+targets:
+  Dayroll:
+    type: application
+    platform: iOS
+    sources:
+      - App
+      - Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.kunish.dayroll
+        CODE_SIGN_ENTITLEMENTS: App/Dayroll.entitlements
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Dayroll
+        UILaunchScreen: {}
+        ITSAppUsesNonExemptEncryption: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        CFBundleURLTypes:
+          - CFBundleURLSchemes: [dayroll]
+    dependencies:
+      - target: DayrollWidget
+        embed: true
+  DayrollWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - Widget
+      - Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.kunish.dayroll.widget
+        CODE_SIGN_ENTITLEMENTS: Widget/DayrollWidget.entitlements
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Dayroll
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+  DayrollTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: Dayroll
+schemes:
+  Dayroll:
+    build:
+      targets:
+        Dayroll: all
+    run:
+      config: Debug
+      storeKitConfiguration: Dayroll.storekit
+      commandLineArguments:
+        "-pro": false
+        "-seedDemo": false
+        "-showStats": false
+    test:
+      targets:
+        - DayrollTests
