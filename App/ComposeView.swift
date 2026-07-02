@@ -53,7 +53,9 @@ struct ComposeView: View {
                     } label: {
                         Text("DELETE THIS DAY")
                             .font(Tape.font(12, weight: .semibold))
+                            .foregroundStyle(Tape.alert)
                     }
+                    .buttonStyle(.plain)
                     .confirmationDialog("Delete this day?", isPresented: $confirmDelete) {
                         Button("Delete", role: .destructive) {
                             DataStore.delete(day: day)
