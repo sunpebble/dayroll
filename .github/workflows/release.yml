@@ -16,7 +16,7 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - id: release
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4
 
   # Runs only when a release PR is merged (release created).
   # Chained here because releases created with GITHUB_TOKEN don't trigger `on: release` workflows.
@@ -29,7 +29,7 @@ jobs:
       ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Install xcodegen
         run: brew install xcodegen
@@ -44,7 +44,7 @@ jobs:
           security default-keychain -s build.keychain
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
           security set-keychain-settings -lut 1800 build.keychain
-          echo "$DIST_CERT_P12" | base64 --decode > cert.p12
+          echo "$DIST_CERT_P12" | base64 -d > cert.p12
           security import cert.p12 -k build.keychain -P "$DIST_CERT_PASSWORD" -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" build.keychain
           rm cert.p12
@@ -54,7 +54,8 @@ jobs:
           ASC_API_KEY_P8: ${{ secrets.ASC_API_KEY_P8 }}
         run: |
           mkdir -p private_keys
-          echo "$ASC_API_KEY_P8" > "private_keys/AuthKey_${ASC_KEY_ID}.p8"
+          printf '%s\n' "$ASC_API_KEY_P8" > "private_keys/AuthKey_${ASC_KEY_ID}.p8"
+          chmod 600 "private_keys/AuthKey_${ASC_KEY_ID}.p8"
 
       - name: Generate Xcode project
         run: xcodegen generate
@@ -95,3 +96,9 @@ jobs:
             -authenticationKeyPath "$PWD/private_keys/AuthKey_${ASC_KEY_ID}.p8" \
             -authenticationKeyID "$ASC_KEY_ID" \
             -authenticationKeyIssuerID "$ASC_ISSUER_ID"
+
+      - name: Clean up credentials
+        if: always()
+        run: |
+          rm -rf private_keys ExportOptions.plist
+          security delete-keychain build.keychain || true
