@@ -40,6 +40,13 @@ struct PaywallView: View {
                     .background(RoundedRectangle(cornerRadius: 12).fill(Tape.ink))
             }
 
+            if let error = pro.purchaseError {
+                Text(error)
+                    .font(Tape.font(11))
+                    .foregroundStyle(.red)
+                    .multilineTextAlignment(.center)
+            }
+
             Button("Restore Purchase") {
                 Task {
                     await pro.restore()

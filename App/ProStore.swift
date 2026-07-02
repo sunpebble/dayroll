@@ -7,6 +7,7 @@ final class ProStore {
 
     var isPro = false
     var product: Product?
+    var purchaseError: String?
 
     var displayPrice: String { product?.displayPrice ?? "$1.99" }
 
@@ -18,7 +19,14 @@ final class ProStore {
             return
         }
         #endif
-        product = try? await Product.products(for: [Self.productID]).first
+        do {
+            product = try await Product.products(for: [Self.productID]).first
+            if product == nil {
+                purchaseError = "Product not available. Check App Store Connect setup."
+            }
+        } catch {
+            purchaseError = "Couldn't load product: \(error.localizedDescription)"
+        }
         await refresh()
     }
 
@@ -34,17 +42,38 @@ final class ProStore {
 
     @MainActor
     func purchase() async {
-        guard let product else { return }
-        guard let result = try? await product.purchase() else { return }
-        if case .success(.verified(let transaction)) = result {
-            isPro = true
-            await transaction.finish()
+        purchaseError = nil
+        guard let product else {
+            purchaseError = "Product not available. Check App Store Connect setup."
+            return
+        }
+        do {
+            switch try await product.purchase() {
+            case .success(.verified(let transaction)):
+                isPro = true
+                await transaction.finish()
+            case .success(.unverified(_, let error)):
+                purchaseError = "Purchase couldn't be verified: \(error.localizedDescription)"
+            case .pending:
+                purchaseError = "Purchase is pending approval."
+            case .userCancelled:
+                break
+            @unknown default:
+                break
+            }
+        } catch {
+            purchaseError = "Purchase failed: \(error.localizedDescription)"
         }
     }
 
     @MainActor
     func restore() async {
-        try? await AppStore.sync()
+        purchaseError = nil
+        do {
+            try await AppStore.sync()
+        } catch {
+            purchaseError = "Restore failed: \(error.localizedDescription)"
+        }
         await refresh()
     }
 
