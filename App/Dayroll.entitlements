@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.kunish.dayroll</string>
+		<string>group.com.sunpebble.dayroll</string>
 	</array>
 </dict>
 </plist>

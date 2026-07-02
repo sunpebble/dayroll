@@ -3,7 +3,7 @@ import SwiftData
 import WidgetKit
 
 enum DataStore {
-    static let appGroupID = "group.com.kunish.dayroll"
+    static let appGroupID = "group.com.sunpebble.dayroll"
 
     static var storeURL: URL {
         let base = FileManager.default

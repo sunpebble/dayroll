@@ -3,7 +3,7 @@ import StoreKit
 
 @Observable
 final class ProStore {
-    static let productID = "com.kunish.dayroll.lifetime"
+    static let productID = "com.sunpebble.dayroll.lifetime"
 
     var isPro = false
     var product: Product?
