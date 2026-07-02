@@ -5,7 +5,7 @@ struct ComposeView: View {
     private let day: Date
 
     @Environment(\.dismiss) private var dismiss
-    @State private var mood: Mood?
+    @State private var mood: Mood = .meh
     @State private var line = ""
     @State private var hasEntry = false
     @State private var confirmDelete = false
@@ -29,7 +29,7 @@ struct ComposeView: View {
                         } label: {
                             Text(candidate.emoji)
                                 .font(.system(size: 32))
-                                .opacity(mood == nil || mood == candidate ? 1 : 0.3)
+                                .opacity(mood == candidate ? 1 : 0.3)
                                 .scaleEffect(mood == candidate ? 1.2 : 1)
                         }
                         .buttonStyle(.plain)
@@ -86,7 +86,7 @@ struct ComposeView: View {
         let target = day
         let descriptor = FetchDescriptor<Entry>(predicate: #Predicate { $0.day == target })
         if let entry = try? DataStore.container.mainContext.fetch(descriptor).first {
-            mood = entry.mood
+            mood = entry.mood ?? .meh
             line = entry.line
             hasEntry = true
         }
