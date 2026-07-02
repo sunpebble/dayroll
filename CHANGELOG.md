@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.3](https://github.com/sunpebble/dayroll/compare/v0.2.2...v0.2.3) (2026-07-02)
+
+
+### Bug Fixes
+
+* remove long-press context menu on entries ([5ce1c11](https://github.com/sunpebble/dayroll/commit/5ce1c11bf9c6c040d619afdf1a40a93bf68c6897))
+* surface StoreKit purchase failures on the paywall ([c43dccf](https://github.com/sunpebble/dayroll/commit/c43dccf1954a037b3c266fc2b4913faa30101bab))
+
 ## [0.2.2](https://github.com/sunpebble/dayroll/compare/v0.2.1...v0.2.2) (2026-07-02)
 
 
