@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6](https://github.com/sunpebble/dayroll/compare/v0.2.5...v0.2.6) (2026-07-03)
+
+
+### Bug Fixes
+
+* cache the Pro unlock locally so paid users never see the paywall ([d128b14](https://github.com/sunpebble/dayroll/commit/d128b14481557097605a7f51eb10fdb687a50502))
+
 ## [0.2.5](https://github.com/sunpebble/dayroll/compare/v0.2.4...v0.2.5) (2026-07-03)
 
 
