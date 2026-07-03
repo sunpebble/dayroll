@@ -10,9 +10,13 @@ struct RootView: View {
         var id: Date { day }
     }
 
+    private enum PaywallIntent { case stats, export }
+
     @State private var composeTarget: ComposeTarget?
     @State private var showPaywall = false
+    @State private var paywallIntent = PaywallIntent.stats
     @State private var showStats = false
+    @State private var showExport = false
 
     private var streak: Int { DataStore.streak(days: entries.map(\.day)) }
 
@@ -49,7 +53,12 @@ struct RootView: View {
                 .toolbar {
                     ToolbarItemGroup(placement: .topBarTrailing) {
                         Button {
-                            pro.isPro ? (showStats = true) : (showPaywall = true)
+                            if pro.isPro {
+                                showStats = true
+                            } else {
+                                paywallIntent = .stats
+                                showPaywall = true
+                            }
                         } label: {
                             Image(systemName: "chart.bar")
                         }
@@ -58,8 +67,19 @@ struct RootView: View {
                 }
                 .toolbarBackground(Tape.paper, for: .navigationBar)
                 .sheet(item: $composeTarget) { target in ComposeView(day: target.day) }
-                .sheet(isPresented: $showPaywall) { PaywallView() }
+                .sheet(isPresented: $showPaywall, onDismiss: {
+                    // 购买/恢复成功后续接用户原本想做的事,而不是干等着再点一次
+                    guard pro.isPro else { return }
+                    switch paywallIntent {
+                    case .stats: showStats = true
+                    case .export: showExport = true
+                    }
+                }) { PaywallView() }
                 .sheet(isPresented: $showStats) { StatsView(entries: entries) }
+                .sheet(isPresented: $showExport) {
+                    ActivityView(text: exportText)
+                        .presentationDetents([.medium])
+                }
                 .onOpenURL { url in
                     if url.host() == "compose" { composeTarget = ComposeTarget(day: .now) }
                 }
@@ -164,16 +184,16 @@ struct RootView: View {
         .buttonStyle(TapePressStyle())
     }
 
-    @ViewBuilder
     private var exportButton: some View {
-        if pro.isPro {
-            ShareLink(item: exportText) {
-                Image(systemName: "square.and.arrow.up")
+        Button {
+            if pro.isPro {
+                showExport = true
+            } else {
+                paywallIntent = .export
+                showPaywall = true
             }
-        } else {
-            Button { showPaywall = true } label: {
-                Image(systemName: "square.and.arrow.up")
-            }
+        } label: {
+            Image(systemName: "square.and.arrow.up")
         }
     }
 
@@ -198,6 +218,18 @@ struct RootView: View {
         }
         .buttonStyle(TapePressStyle())
     }
+}
+
+// ponytail: ShareLink can't be presented programmatically, and the paywall needs to
+// resume the export after purchase — so export goes through UIActivityViewController
+private struct ActivityView: UIViewControllerRepresentable {
+    let text: String
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: [text], applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
 }
 
 /// Contacts-style index strip: tap or scrub to jump between months.
