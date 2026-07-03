@@ -5,24 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dayroll — One Line a Day</title>
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 640px; margin: 0 auto; padding: 64px 24px 96px; color: #1a1a1a;
-  }
-  @media (prefers-color-scheme: dark) { body { background: #111; color: #e6e6e6; } a { color: #6db3f2; } }
-  h1 { font-size: 34px; letter-spacing: 6px; margin: 0; }
-  .tag { color: #888; letter-spacing: 2px; font-size: 13px; margin-top: 8px; }
-  h2 { font-size: 19px; margin-top: 40px; }
-  ul { padding-left: 20px; }
-  li { margin: 6px 0; }
-  a { color: #0a63c9; }
-  .foot { margin-top: 48px; color: #888; font-size: 14px; }
+  :root { --cream:#FFF6E8; --sun:#F7B733; --pebble:#6E6E73; --ink:#232733; }
+  * { margin:0; box-sizing:border-box; }
+  body { font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+         background:var(--cream); color:var(--ink); line-height:1.65;
+         max-width:640px; margin:0 auto; padding:64px 24px 96px; }
+  h1, h2 { font-family:"New York", "Iowan Old Style", Georgia, serif; }
+  h1 { font-size:2.2rem; letter-spacing:-.02em; }
+  h2 { font-size:1.1rem; margin:36px 0 8px; }
+  .tag { color:var(--pebble); font-size:1.15rem; margin-top:4px; }
+  p { margin-top:8px; }
+  ul { padding-left:20px; margin-top:8px; }
+  li { margin:6px 0; }
+  a { color:inherit; }
+  .foot { margin-top:48px; color:var(--pebble); font-size:.85rem; }
 </style>
 </head>
 <body>
-  <h1>DAYROLL</h1>
-  <p class="tag">* ONE LINE A DAY *</p>
+  <h1>Dayroll</h1>
+  <p class="tag">One line a day.</p>
 
   <p>Dayroll is a quiet daily journal. One line, one mood, every day — printed onto an endless paper tape you can scroll back through for years. No feeds, no accounts, no noise. Just today, and the streak you're keeping.</p>
 
@@ -39,8 +40,8 @@
   <p>Everything stays on your device. Dayroll has no servers, no accounts, no tracking, and no third-party SDKs. Your writing is yours alone. See our <a href="privacy.html">Privacy Policy</a>.</p>
 
   <h2>Support</h2>
-  <p>Questions, bugs, or ideas? Email <a href="mailto:kunish.butt@gmail.com">kunish.butt@gmail.com</a> — I read every message.</p>
+  <p>Questions, bugs, or ideas? Email <a href="mailto:support@sunpebblelabs.com">support@sunpebblelabs.com</a> — we read every message.</p>
 
-  <p class="foot">Dayroll is a one-time purchase to unlock Pro; the daily journal is free forever.<br>© 2026 Sunpebble Labs</p>
+  <p class="foot">Dayroll is a one-time purchase to unlock Pro; the daily journal is free forever.<br>© 2026 Sunpebble Labs · A <a href="https://sunpebblelabs.com">Sunpebble</a> app</p>
 </body>
 </html>

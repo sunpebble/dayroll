@@ -1,10 +1,12 @@
 import SwiftUI
 
-/// Receipt-paper design tokens.
+/// Receipt-paper design tokens. Paper/ink are the shared Sunpebble
+/// cream #FFF6E8 / ink #232733 (same values as Simmer & Sleeptab);
+/// the receipt personality lives in the monospaced type and Perforation.
 enum Tape {
-    static let paper = Color(red: 0.98, green: 0.96, blue: 0.91)
-    static let ink = Color(red: 0.15, green: 0.13, blue: 0.11)
-    static let faded = ink.opacity(0.45)
+    static let paper = Color(red: 1.0, green: 0.965, blue: 0.91)
+    static let ink = Color(red: 0.137, green: 0.153, blue: 0.20)
+    static let faded = ink.opacity(0.55)
     static let alert = Color(red: 0.72, green: 0.13, blue: 0.09)
 
     static func font(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
