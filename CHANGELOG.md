@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/sunpebble/dayroll/compare/v0.2.3...v0.2.4) (2026-07-03)
+
+
+### Bug Fixes
+
+* resume the gated action after purchase unlocks Pro ([2082187](https://github.com/sunpebble/dayroll/commit/20821872e5cc8f73ddf3601fc19d5546df02759e))
+
 ## [0.2.3](https://github.com/sunpebble/dayroll/compare/v0.2.2...v0.2.3) (2026-07-02)
 
 
