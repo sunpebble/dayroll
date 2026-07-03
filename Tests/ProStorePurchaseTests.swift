@@ -13,6 +13,7 @@ final class ProStorePurchaseTests: XCTestCase {
         session = try SKTestSession(configurationFileNamed: "Dayroll")
         session.disableDialogs = true          // 购买无需 UI 确认,直接完成
         try session.clearTransactions()         // 每个测试从"未购买"开始
+        UserDefaults.standard.removeObject(forKey: ProStore.proCacheKey)  // 解锁缓存同样清零
     }
 
     override func tearDown() {
