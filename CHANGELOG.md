@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/sunpebble/dayroll/compare/v0.2.6...v0.3.0) (2026-07-03)
+
+
+### Features
+
+* align paper/ink tokens with the Sunpebble brand palette ([a308afb](https://github.com/sunpebble/dayroll/commit/a308afb21ddcea65000ce10043de1798d2d00a21))
+
 ## [0.2.6](https://github.com/sunpebble/dayroll/compare/v0.2.5...v0.2.6) (2026-07-03)
 
 
