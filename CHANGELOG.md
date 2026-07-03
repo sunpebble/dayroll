@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/sunpebble/dayroll/compare/v0.2.4...v0.2.5) (2026-07-03)
+
+
+### Bug Fixes
+
+* re-check entitlements when the paywall appears ([90ae66e](https://github.com/sunpebble/dayroll/commit/90ae66ef024d18b29deccf7ca10f30018477a5bc))
+
 ## [0.2.4](https://github.com/sunpebble/dayroll/compare/v0.2.3...v0.2.4) (2026-07-03)
 
 
