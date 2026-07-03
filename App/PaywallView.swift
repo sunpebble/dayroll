@@ -62,6 +62,12 @@ struct PaywallView: View {
         .background(Tape.paper)
         .tint(Tape.ink)
         .presentationDetents([.medium, .large])
+        // 启动时 currentEntitlements 可能还没就绪(TestFlight 更新后首启常见),
+        // 弹 paywall 时重查一次,已购则直接放行,不让老用户再看到解锁页
+        .task {
+            await pro.refresh()
+            if pro.isPro { dismiss() }
+        }
     }
 
     private func feature(_ icon: String, _ text: String) -> some View {
