@@ -104,6 +104,9 @@ jobs:
           issuer-id: ${{ secrets.ASC_ISSUER_ID }}
           api-key-id: ${{ secrets.ASC_KEY_ID }}
           api-private-key: ${{ secrets.ASC_API_KEY_P8 }}
+          # The action signs one short-lived JWT up front; its processing-poll loop
+          # outlives the token and dies with a 401 even though the upload succeeded.
+          wait-for-processing: 'false'
 
       - name: Clean up credentials
         if: always()
