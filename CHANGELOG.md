@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/sunpebble/dayroll/compare/v0.3.0...v0.4.0) (2026-07-05)
+
+
+### Features
+
+* best-streak stat, text/Markdown/CSV export, and On This Day memories ([382b0e2](https://github.com/sunpebble/dayroll/commit/382b0e257bf72b639127e46a56ce88621f6daa6e))
+* optional daily reminder notification ([f9dbb7a](https://github.com/sunpebble/dayroll/commit/f9dbb7a844431f8d79b686f657352549cb492fb3))
+
 ## [0.3.0](https://github.com/sunpebble/dayroll/compare/v0.2.6...v0.3.0) (2026-07-03)
 
 
