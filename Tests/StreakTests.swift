@@ -40,4 +40,23 @@ final class StreakTests: XCTestCase {
             2
         )
     }
+
+    func testLongestStreak() {
+        let today = calendar.startOfDay(for: Date(timeIntervalSince1970: 1_780_000_000))
+
+        XCTAssertEqual(DataStore.longestStreak(days: [], calendar: calendar), 0)
+
+        // a dead 3-day run in the past beats the live 2-day run
+        let days = [
+            today, day(-1, from: today),                                  // current run: 2
+            day(-5, from: today), day(-6, from: today), day(-7, from: today),  // old run: 3
+        ]
+        XCTAssertEqual(DataStore.longestStreak(days: days, calendar: calendar), 3)
+
+        // duplicates within a day count once
+        XCTAssertEqual(
+            DataStore.longestStreak(days: [today, today.addingTimeInterval(60)], calendar: calendar),
+            1
+        )
+    }
 }

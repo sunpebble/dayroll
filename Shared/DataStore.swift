@@ -66,6 +66,60 @@ enum DataStore {
     }
     #endif
 
+    /// Longest run of consecutive logged days anywhere in history.
+    static func longestStreak(days: [Date], calendar: Calendar = .current) -> Int {
+        let logged = Set(days.map { calendar.startOfDay(for: $0) })
+        var best = 0
+        for day in logged {
+            // only walk forward from the first day of each run
+            guard !logged.contains(calendar.date(byAdding: .day, value: -1, to: day)!) else { continue }
+            var cursor = day
+            var count = 0
+            while logged.contains(cursor) {
+                count += 1
+                cursor = calendar.date(byAdding: .day, value: 1, to: cursor)!
+            }
+            best = max(best, count)
+        }
+        return best
+    }
+
+    enum ExportFormat: String, CaseIterable, Identifiable {
+        case text = "Plain Text"
+        case markdown = "Markdown"
+        case csv = "CSV"
+        var id: String { rawValue }
+    }
+
+    static func export(_ entries: [Entry], as format: ExportFormat) -> String {
+        let sorted = entries.sorted { $0.day < $1.day }
+        switch format {
+        case .text:
+            return sorted.map { entry in
+                let date = entry.day.formatted(.iso8601.year().month().day())
+                let mood = entry.mood.map { " [\($0.rawValue)]" } ?? ""
+                return "\(date)\(mood) \(entry.line)"
+            }
+            .joined(separator: "\n")
+        case .markdown:
+            return sorted.map { entry in
+                let date = entry.day.formatted(.iso8601.year().month().day())
+                let mood = entry.mood.map { " \($0.emoji)" } ?? ""
+                return "- **\(date)**\(mood) \(entry.line)"
+            }
+            .joined(separator: "\n")
+        case .csv:
+            let rows = sorted.map { entry in
+                let date = entry.day.formatted(.iso8601.year().month().day())
+                let line = entry.line.contains(where: { ",\"\n".contains($0) })
+                    ? "\"\(entry.line.replacingOccurrences(of: "\"", with: "\"\""))\""
+                    : entry.line
+                return "\(date),\(entry.mood?.rawValue ?? ""),\(line)"
+            }
+            return (["date,mood,line"] + rows).joined(separator: "\n")
+        }
+    }
+
     /// Consecutive days ending today, or ending yesterday if today isn't logged yet.
     static func streak(days: [Date], today: Date = .now, calendar: Calendar = .current) -> Int {
         let logged = Set(days.map { calendar.startOfDay(for: $0) })

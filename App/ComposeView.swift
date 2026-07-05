@@ -4,11 +4,13 @@ import SwiftData
 struct ComposeView: View {
     private let day: Date
 
+    @Environment(ProStore.self) private var pro
     @Environment(\.dismiss) private var dismiss
     @State private var mood: Mood = .meh
     @State private var line = ""
     @State private var hasEntry = false
     @State private var confirmDelete = false
+    @State private var memories: [(yearsAgo: Int, emoji: String?, line: String)] = []
     @FocusState private var focused: Bool
 
     init(day: Date = .now) {
@@ -44,6 +46,29 @@ struct ComposeView: View {
                     .onSubmit(save)
                     .padding(14)
                     .background(RoundedRectangle(cornerRadius: 10).stroke(Tape.faded))
+
+                if !memories.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("ON THIS DAY")
+                            .font(Tape.font(10, weight: .bold))
+                            .kerning(1.5)
+                            .foregroundStyle(Tape.faded)
+                        ForEach(memories, id: \.yearsAgo) { memory in
+                            HStack(alignment: .top, spacing: 8) {
+                                Text(memory.yearsAgo == 1 ? "1 YR AGO" : "\(memory.yearsAgo) YRS AGO")
+                                    .font(Tape.font(10, weight: .semibold))
+                                    .foregroundStyle(Tape.faded)
+                                    .frame(width: 62, alignment: .leading)
+                                if let emoji = memory.emoji { Text(emoji).font(.system(size: 12)) }
+                                Text(memory.line.isEmpty ? "—" : memory.line)
+                                    .font(Tape.font(12))
+                                    .foregroundStyle(Tape.ink)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
 
                 Spacer()
 
@@ -92,7 +117,21 @@ struct ComposeView: View {
             line = entry.line
             hasEntry = true
         }
+        if pro.isPro { loadMemories() }
         focused = true
+    }
+
+    /// On This Day (Pro): same calendar date in earlier years.
+    private func loadMemories() {
+        let calendar = Calendar.current
+        for years in 1...30 {
+            guard let past = calendar.date(byAdding: .year, value: -years, to: day) else { break }
+            let target = calendar.startOfDay(for: past)
+            let descriptor = FetchDescriptor<Entry>(predicate: #Predicate { $0.day == target })
+            if let entry = try? DataStore.container.mainContext.fetch(descriptor).first {
+                memories.append((years, entry.mood?.emoji, entry.line))
+            }
+        }
     }
 
     private func save() {

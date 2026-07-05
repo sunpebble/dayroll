@@ -13,8 +13,9 @@ struct PaywallView: View {
             Perforation()
 
             VStack(alignment: .leading, spacing: 14) {
-                feature("square.and.arrow.up", "Export your whole tape")
-                feature("chart.bar", "Mood stats & yearly review")
+                feature("square.and.arrow.up", "Export your tape — text, Markdown or CSV")
+                feature("chart.bar", "Streaks, mood trends & yearly review")
+                feature("clock.arrow.circlepath", "On This Day — see past years while you write")
                 feature("heart", "Support an indie developer")
             }
             .padding(.vertical, 8)

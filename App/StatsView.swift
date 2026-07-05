@@ -43,9 +43,11 @@ struct StatsView: View {
                     .padding(.top, 32)
 
                 HStack {
-                    Text("TOTAL DAYS: \(entries.count)")
+                    Text("TOTAL: \(entries.count)")
                     Spacer()
                     Text("STREAK: \(DataStore.streak(days: entries.map(\.day)))")
+                    Spacer()
+                    Text("BEST: \(DataStore.longestStreak(days: entries.map(\.day)))")
                 }
                 .font(Tape.font(12, weight: .semibold))
                 .foregroundStyle(Tape.faded)
