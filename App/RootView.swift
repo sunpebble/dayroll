@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 struct RootView: View {
     @Environment(ProStore.self) private var pro
@@ -16,7 +17,10 @@ struct RootView: View {
     @State private var showPaywall = false
     @State private var paywallIntent = PaywallIntent.stats
     @State private var showStats = false
+    @State private var showExportDialog = false
+    @State private var exportFormat = DataStore.ExportFormat.text
     @State private var showExport = false
+    @State private var showReminder = false
 
     private var streak: Int { DataStore.streak(days: entries.map(\.day)) }
 
@@ -53,6 +57,11 @@ struct RootView: View {
                 .toolbar {
                     ToolbarItemGroup(placement: .topBarTrailing) {
                         Button {
+                            showReminder = true
+                        } label: {
+                            Image(systemName: "bell")
+                        }
+                        Button {
                             if pro.isPro {
                                 showStats = true
                             } else {
@@ -72,10 +81,14 @@ struct RootView: View {
                     guard pro.isPro else { return }
                     switch paywallIntent {
                     case .stats: showStats = true
-                    case .export: showExport = true
+                    case .export: showExportDialog = true
                     }
                 }) { PaywallView() }
                 .sheet(isPresented: $showStats) { StatsView(entries: entries) }
+                .sheet(isPresented: $showReminder) {
+                    ReminderSheet()
+                        .presentationDetents([.height(220)])
+                }
                 .sheet(isPresented: $showExport) {
                     ActivityView(text: exportText)
                         .presentationDetents([.medium])
@@ -187,7 +200,7 @@ struct RootView: View {
     private var exportButton: some View {
         Button {
             if pro.isPro {
-                showExport = true
+                showExportDialog = true
             } else {
                 paywallIntent = .export
                 showPaywall = true
@@ -195,17 +208,18 @@ struct RootView: View {
         } label: {
             Image(systemName: "square.and.arrow.up")
         }
+        .confirmationDialog("Export format", isPresented: $showExportDialog, titleVisibility: .visible) {
+            ForEach(DataStore.ExportFormat.allCases) { format in
+                Button(format.rawValue) {
+                    exportFormat = format
+                    showExport = true
+                }
+            }
+        }
     }
 
     private var exportText: String {
-        entries
-            .sorted { $0.day < $1.day }
-            .map { entry in
-                let date = entry.day.formatted(.iso8601.year().month().day())
-                let mood = entry.mood.map { " [\($0.rawValue)]" } ?? ""
-                return "\(date)\(mood) \(entry.line)"
-            }
-            .joined(separator: "\n")
+        DataStore.export(entries, as: exportFormat)
     }
 
     private var logButton: some View {
@@ -230,6 +244,75 @@ private struct ActivityView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
+}
+
+/// Daily "one line about today?" nudge. A repeating calendar trigger — it fires
+/// whether or not today is already logged; rescheduling per-day isn't worth it.
+struct ReminderSheet: View {
+    @AppStorage("reminderEnabled") private var enabled = false
+    @AppStorage("reminderMinutes") private var minutes = 21 * 60  // 21:00
+
+    private static let notificationID = "daily-reminder"
+
+    private var time: Binding<Date> {
+        Binding(
+            get: {
+                Calendar.current.date(bySettingHour: minutes / 60, minute: minutes % 60,
+                                      second: 0, of: .now) ?? .now
+            },
+            set: {
+                let comps = Calendar.current.dateComponents([.hour, .minute], from: $0)
+                minutes = comps.hour! * 60 + comps.minute!
+            }
+        )
+    }
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("DAILY REMINDER")
+                .font(Tape.font(14, weight: .bold))
+                .kerning(3)
+                .padding(.top, 28)
+            Perforation()
+            Toggle(isOn: $enabled) {
+                Text("REMIND ME TO LOG")
+                    .font(Tape.font(12, weight: .semibold))
+                    .kerning(1)
+            }
+            .tint(Tape.ink)
+            if enabled {
+                DatePicker("Time", selection: time, displayedComponents: .hourAndMinute)
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 24)
+        .foregroundStyle(Tape.ink)
+        .background(Tape.paper)
+        .onChange(of: enabled) { sync() }
+        .onChange(of: minutes) { sync() }
+    }
+
+    private func sync() {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [Self.notificationID])
+        guard enabled else { return }
+        Task {
+            _ = try? await center.requestAuthorization(options: [.alert, .sound])
+        }
+        let content = UNMutableNotificationContent()
+        content.title = "Dayroll"
+        content.body = "One line about today?"
+        content.sound = .default
+        var comps = DateComponents()
+        comps.hour = minutes / 60
+        comps.minute = minutes % 60
+        center.add(UNNotificationRequest(
+            identifier: Self.notificationID,
+            content: content,
+            trigger: UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)))
+    }
 }
 
 /// Contacts-style index strip: tap or scrub to jump between months.
