@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/sunpebble/dayroll/compare/v0.4.0...v0.5.0) (2026-07-06)
+
+
+### Features
+
+* add Simplified Chinese (zh-Hans) localization ([d0f4192](https://github.com/sunpebble/dayroll/commit/d0f41927c64ecc64355d007920a5cf5ce5c6b4e7))
+
 ## [0.4.0](https://github.com/sunpebble/dayroll/compare/v0.3.0...v0.4.0) (2026-07-05)
 
 
