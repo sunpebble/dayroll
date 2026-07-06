@@ -115,7 +115,7 @@ struct StatsView: View {
         .presentationDetents([.large])
     }
 
-    private func section(_ title: String, @ViewBuilder content: () -> some View) -> some View {
+    private func section(_ title: LocalizedStringKey, @ViewBuilder content: () -> some View) -> some View {
         VStack(spacing: 12) {
             Perforation()
             Text(title)

@@ -210,7 +210,7 @@ struct RootView: View {
         }
         .confirmationDialog("Export format", isPresented: $showExportDialog, titleVisibility: .visible) {
             ForEach(DataStore.ExportFormat.allCases) { format in
-                Button(format.rawValue) {
+                Button(LocalizedStringKey(format.rawValue)) {
                     exportFormat = format
                     showExport = true
                 }
@@ -303,7 +303,7 @@ struct ReminderSheet: View {
         }
         let content = UNMutableNotificationContent()
         content.title = "Dayroll"
-        content.body = "One line about today?"
+        content.body = String(localized: "One line about today?")
         content.sound = .default
         var comps = DateComponents()
         comps.hour = minutes / 60

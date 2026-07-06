@@ -85,10 +85,16 @@ struct TodayWidgetView: View {
                 Link(destination: URL(string: "dayroll://compose")!) {
                     HStack(spacing: 6) {
                         Text(mood.emoji).font(.system(size: 18))
-                        Text(snapshot.line.isEmpty ? "Add one line…" : snapshot.line)
-                            .font(.system(size: 12, design: .monospaced))
-                            .lineLimit(2)
-                            .foregroundStyle(snapshot.line.isEmpty ? .secondary : .primary)
+                        Group {
+                            if snapshot.line.isEmpty {
+                                Text("Add one line…")
+                            } else {
+                                Text(snapshot.line)
+                            }
+                        }
+                        .font(.system(size: 12, design: .monospaced))
+                        .lineLimit(2)
+                        .foregroundStyle(snapshot.line.isEmpty ? .secondary : .primary)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 }
@@ -142,16 +148,26 @@ struct AccessoryView: View {
                     .font(.system(size: 12, weight: .bold, design: .monospaced))
             }
         case .accessoryInline:
-            Text(snapshot.mood == nil ? "Dayroll: log today" : "Dayroll ✓ \(snapshot.streak)d")
+            if snapshot.mood == nil {
+                Text("Dayroll: log today")
+            } else {
+                Text("Dayroll ✓ \(snapshot.streak)d")
+            }
         default:
             VStack(alignment: .leading, spacing: 2) {
                 Text("DAYROLL")
                     .font(.system(size: 10, weight: .bold, design: .monospaced))
-                Text(snapshot.mood == nil
-                     ? "Tap to log today"
-                     : (snapshot.line.isEmpty ? "\(snapshot.mood!.emoji) Add one line…" : "\(snapshot.mood!.emoji) \(snapshot.line)"))
-                    .font(.system(size: 11, design: .monospaced))
-                    .lineLimit(2)
+                Group {
+                    if snapshot.mood == nil {
+                        Text("Tap to log today")
+                    } else if snapshot.line.isEmpty {
+                        Text("\(snapshot.mood!.emoji) Add one line…")
+                    } else {
+                        Text("\(snapshot.mood!.emoji) \(snapshot.line)")
+                    }
+                }
+                .font(.system(size: 11, design: .monospaced))
+                .lineLimit(2)
             }
         }
     }

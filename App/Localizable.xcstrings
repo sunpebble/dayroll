@@ -1,0 +1,496 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "DAYROLL": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DAYROLL"
+          }
+        }
+      }
+    },
+    "* ONE LINE A DAY *": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "* 每天一行 *"
+          }
+        }
+      }
+    },
+    "NO ENTRIES YET\nTAP + TO LOG TODAY": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无记录\n点 + 记录今天"
+          }
+        }
+      }
+    },
+    "TOTAL DAYS: %lld": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "总天数:%lld"
+          }
+        }
+      }
+    },
+    "STREAK: %lld": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连续:%lld"
+          }
+        }
+      }
+    },
+    "%lld DAYS": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 天"
+          }
+        }
+      }
+    },
+    "Export format": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导出格式"
+          }
+        }
+      }
+    },
+    "Plain Text": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "纯文本"
+          }
+        }
+      }
+    },
+    "Markdown": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown"
+          }
+        }
+      }
+    },
+    "CSV": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV"
+          }
+        }
+      }
+    },
+    "DAILY REMINDER": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每日提醒"
+          }
+        }
+      }
+    },
+    "REMIND ME TO LOG": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提醒我记录"
+          }
+        }
+      }
+    },
+    "Time": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "时间"
+          }
+        }
+      }
+    },
+    "One line about today?": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今天写点什么?"
+          }
+        }
+      }
+    },
+    "One line about today…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写下一句今天…"
+          }
+        }
+      }
+    },
+    "ON THIS DAY": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "往年今日"
+          }
+        }
+      }
+    },
+    "1 YR AGO": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 年前"
+          }
+        }
+      }
+    },
+    "%lld YRS AGO": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 年前"
+          }
+        }
+      }
+    },
+    "DELETE THIS DAY": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除这一天"
+          }
+        }
+      }
+    },
+    "Delete this day?": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除这一天?"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        }
+      }
+    },
+    "DAYROLL PRO": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DAYROLL PRO"
+          }
+        }
+      }
+    },
+    "Export your tape — text, Markdown or CSV": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导出你的记录 — 文本、Markdown 或 CSV"
+          }
+        }
+      }
+    },
+    "Streaks, mood trends & yearly review": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连续天数、心情趋势与年度回顾"
+          }
+        }
+      }
+    },
+    "On This Day — see past years while you write": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "往年今日 — 边写边看过去的年份"
+          }
+        }
+      }
+    },
+    "Support an indie developer": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支持独立开发者"
+          }
+        }
+      }
+    },
+    "PAY ONCE. YOURS FOREVER.\nNO SUBSCRIPTION. NO ACCOUNT.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一次购买,终身可用。\n无需订阅,无需账号。"
+          }
+        }
+      }
+    },
+    "UNLOCK FOR %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以 %@ 解锁"
+          }
+        }
+      }
+    },
+    "Restore Purchase": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢复购买"
+          }
+        }
+      }
+    },
+    "Product not available. Check App Store Connect setup.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商品不可用。请检查 App Store Connect 配置。"
+          }
+        }
+      }
+    },
+    "Couldn't load product: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法加载商品:%@"
+          }
+        }
+      }
+    },
+    "Purchase couldn't be verified: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "购买无法验证:%@"
+          }
+        }
+      }
+    },
+    "Purchase is pending approval.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "购买待审批。"
+          }
+        }
+      }
+    },
+    "Purchase failed: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "购买失败:%@"
+          }
+        }
+      }
+    },
+    "Restore failed: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢复失败:%@"
+          }
+        }
+      }
+    },
+    "Mood": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "心情"
+          }
+        }
+      }
+    },
+    "😄 Great": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "😄 很好"
+          }
+        }
+      }
+    },
+    "🙂 Good": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🙂 不错"
+          }
+        }
+      }
+    },
+    "😐 Meh": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "😐 一般"
+          }
+        }
+      }
+    },
+    "😞 Bad": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "😞 不好"
+          }
+        }
+      }
+    },
+    "😣 Awful": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "😣 糟透了"
+          }
+        }
+      }
+    },
+    "YOUR TAPE, COUNTED": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的记录统计"
+          }
+        }
+      }
+    },
+    "TOTAL: %lld": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "总计:%lld"
+          }
+        }
+      }
+    },
+    "BEST: %lld": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最长:%lld"
+          }
+        }
+      }
+    },
+    "DAYS LOGGED — LAST 12 MONTHS": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "记录天数 — 最近 12 个月"
+          }
+        }
+      }
+    },
+    "MOOD TREND — LAST 12 MONTHS": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "心情趋势 — 最近 12 个月"
+          }
+        }
+      }
+    },
+    "MOOD MIX — ALL TIME": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "心情分布 — 全部时间"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.3"
+}

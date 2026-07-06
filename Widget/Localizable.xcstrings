@@ -1,0 +1,116 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Today's Line": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日记录"
+          }
+        }
+      }
+    },
+    "Log your mood with one tap.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一键记录心情。"
+          }
+        }
+      }
+    },
+    "DAYROLL": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DAYROLL"
+          }
+        }
+      }
+    },
+    "Add one line…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写下一句…"
+          }
+        }
+      }
+    },
+    "STREAK: %lld": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连续:%lld"
+          }
+        }
+      }
+    },
+    "Log Today": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "记录今天"
+          }
+        }
+      }
+    },
+    "One tap from your Lock Screen.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在锁屏一键记录。"
+          }
+        }
+      }
+    },
+    "Dayroll: log today": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dayroll:记录今天"
+          }
+        }
+      }
+    },
+    "Dayroll ✓ %lldd": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dayroll ✓ %lld 天"
+          }
+        }
+      }
+    },
+    "Tap to log today": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点按记录今天"
+          }
+        }
+      }
+    },
+    "%@ Add one line…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 写下一句…"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.3"
+}
