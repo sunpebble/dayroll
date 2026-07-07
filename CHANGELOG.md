@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.0](https://github.com/sunpebble/dayroll/compare/v0.5.0...v0.6.0) (2026-07-07)
+
+
+### Features
+
+* follow system appearance for light/dark mode ([9da8c1a](https://github.com/sunpebble/dayroll/commit/9da8c1a45ca4c5811a6bb1d9683e5500e54471c6))
+* make Tape design tokens adapt to dark mode ([0d54a2d](https://github.com/sunpebble/dayroll/commit/0d54a2d42ca660f45d6270802a0d5f3f7c4ffa2e))
+
+
+### Bug Fixes
+
+* theme sheet text with Tape.ink so nothing renders white in dark mode ([ed0b9ca](https://github.com/sunpebble/dayroll/commit/ed0b9caade2be92c43cbc24876d7c3c5c7e775b9))
+
 ## [0.5.0](https://github.com/sunpebble/dayroll/compare/v0.4.0...v0.5.0) (2026-07-06)
 
 
