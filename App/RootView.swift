@@ -231,6 +231,7 @@ struct RootView: View {
                 .background(Circle().fill(Tape.ink))
         }
         .buttonStyle(TapePressStyle())
+        .accessibilityIdentifier("log")
     }
 }
 

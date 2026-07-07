@@ -73,11 +73,23 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
     dependencies:
       - target: Dayroll
+  DayrollUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - DayrollUITests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunpebble.dayroll.uitests
+    dependencies:
+      - target: Dayroll
 schemes:
   Dayroll:
     build:
       targets:
         Dayroll: all
+        DayrollUITests: [test]
     run:
       config: Debug
       storeKitConfiguration: Dayroll.storekit
@@ -88,3 +100,4 @@ schemes:
     test:
       targets:
         - DayrollTests
+        - DayrollUITests
