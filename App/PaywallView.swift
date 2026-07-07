@@ -61,6 +61,7 @@ struct PaywallView: View {
         }
         .padding(24)
         .background(Tape.paper)
+        .foregroundStyle(Tape.ink)
         .tint(Tape.ink)
         .presentationDetents([.medium, .large])
         // 启动时 currentEntitlements 可能还没就绪(TestFlight 更新后首启常见),

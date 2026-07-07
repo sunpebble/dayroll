@@ -92,6 +92,7 @@ struct ComposeView: View {
             }
             .padding(20)
             .background(Tape.paper)
+            .foregroundStyle(Tape.ink)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save", action: save)

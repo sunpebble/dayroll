@@ -41,6 +41,11 @@ final class TapeColorTests: XCTestCase {
     }
 
     func testAlertBrightensInDarkMode() {
+        let light = components(Tape.alert, style: .light)
+        XCTAssertEqual(light.r, 0.72, accuracy: 0.01)
+        XCTAssertEqual(light.g, 0.13, accuracy: 0.01)
+        XCTAssertEqual(light.b, 0.09, accuracy: 0.01)
+
         let dark = components(Tape.alert, style: .dark)
         XCTAssertEqual(dark.r, 0.898, accuracy: 0.01)
         XCTAssertEqual(dark.g, 0.357, accuracy: 0.01)
@@ -50,5 +55,11 @@ final class TapeColorTests: XCTestCase {
     func testFadedTracksInkAtHalfOpacity() {
         XCTAssertEqual(components(Tape.faded, style: .light).a, 0.55, accuracy: 0.01)
         XCTAssertEqual(components(Tape.faded, style: .dark).a, 0.55, accuracy: 0.01)
+
+        let darkFaded = components(Tape.faded, style: .dark)
+        let darkInk = components(Tape.ink, style: .dark)
+        XCTAssertEqual(darkFaded.r, darkInk.r, accuracy: 0.01)
+        XCTAssertEqual(darkFaded.g, darkInk.g, accuracy: 0.01)
+        XCTAssertEqual(darkFaded.b, darkInk.b, accuracy: 0.01)
     }
 }

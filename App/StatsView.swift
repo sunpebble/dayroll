@@ -112,6 +112,7 @@ struct StatsView: View {
             .padding(24)
         }
         .background(Tape.paper)
+        .foregroundStyle(Tape.ink)
         .presentationDetents([.large])
     }
 
