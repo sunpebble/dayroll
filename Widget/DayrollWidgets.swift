@@ -57,7 +57,7 @@ struct TodayWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "TodayWidget", provider: Provider()) { snapshot in
             TodayWidgetView(snapshot: snapshot)
-                .containerBackground(Color(red: 0.98, green: 0.96, blue: 0.91), for: .widget)
+                .containerBackground(Tape.paper, for: .widget)
         }
         .configurationDisplayName("Today's Line")
         .description("Log your mood with one tap.")
@@ -67,7 +67,6 @@ struct TodayWidget: Widget {
 
 struct TodayWidgetView: View {
     let snapshot: TapeSnapshot
-    private let ink = Color(red: 0.15, green: 0.13, blue: 0.11)
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -116,7 +115,7 @@ struct TodayWidgetView: View {
                 .font(.system(size: 9, weight: .semibold, design: .monospaced))
                 .foregroundStyle(.secondary)
         }
-        .foregroundStyle(ink)
+        .foregroundStyle(Tape.ink)
     }
 }
 
