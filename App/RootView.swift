@@ -24,7 +24,6 @@ struct RootView: View {
 
     private var streak: Int { DataStore.streak(days: entries.map(\.day)) }
 
-    // ponytail: @Query loads all entries; fine for years of one-liners, revisit at ~10k
     private var months: [(month: Date, entries: [Entry])] {
         let calendar = Calendar.current
         return Dictionary(grouping: entries) { calendar.dateInterval(of: .month, for: $0.day)!.start }
@@ -45,7 +44,6 @@ struct RootView: View {
                                 .padding(.trailing, 2)
                             }
                         }
-                    // ponytail: bar lives outside the ScrollView — .safeAreaInset drifted
                     // the launch scroll offset on iOS 27 beta (compounding across launches)
                     logButton
                         .frame(maxWidth: .infinity)
@@ -132,7 +130,6 @@ struct RootView: View {
                         Perforation()
                     }
                     .padding(20)
-                    // ponytail: receipts are narrow — cap the tape and center it on iPad
                     .frame(maxWidth: 560)
                     .frame(maxWidth: .infinity)
         }
@@ -235,7 +232,6 @@ struct RootView: View {
     }
 }
 
-// ponytail: ShareLink can't be presented programmatically, and the paywall needs to
 // resume the export after purchase — so export goes through UIActivityViewController
 private struct ActivityView: UIViewControllerRepresentable {
     let text: String

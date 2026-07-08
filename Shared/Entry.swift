@@ -1,7 +1,6 @@
 import Foundation
 import SwiftData
 
-// ponytail: one entry per day, .unique on day — drop .unique before enabling CloudKit sync
 @Model
 final class Entry {
     @Attribute(.unique) var day: Date
